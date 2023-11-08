@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs213project4.MainController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <children>
+      <BorderPane prefHeight="500.0" prefWidth="500.0">
+         <center>
+            <GridPane maxHeight="400.0" prefHeight="400.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="specialty_pizzas" contentDisplay="TOP" mnemonicParsing="false" onAction="#onSpecialtyPizzaClick" prefHeight="25.0" prefWidth="178.0" text="Specialty Pizzas">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@specialtypizza.jpg" />
+                           </image></ImageView>
+                     </graphic></Button>
+                  <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#onBuildYourOwnClick" text="Build Your Own Pizza" GridPane.columnIndex="1">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@buildyourown.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#onCurrentOrderClick" text="Current Order" GridPane.rowIndex="1">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@cart.gif" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#onStoreOrdersClick" text="Store Orders" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@storeorder.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+               </children>
+            </GridPane>
+         </center>
+         <top>
+            <Label alignment="CENTER" prefHeight="95.0" prefWidth="195.0" text="RU PIZZA" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+         </top>
+      </BorderPane>
+   </children>
+</VBox>
