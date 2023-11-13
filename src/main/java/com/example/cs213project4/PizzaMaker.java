@@ -28,10 +28,10 @@ public class PizzaMaker {
     public static void main(String[] args){
 
         Pizza test = createPizza("Deluxe");
-        ArrayList<Topping> temp = test.toppings;
-        for(int i =0; i<temp.size(); i++){
-            System.out.println(temp.get(i));
-        }
+        System.out.println(test.price());
+        test.size = Size.LARGE;
+        System.out.println(test.price());
+
 
         System.out.println(test.sauce);
         System.out.println(test.size);
