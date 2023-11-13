@@ -33,6 +33,11 @@ public class SpecialtyPizzaController implements Initializable {
 
     private Pizza pizza;
 
+    /**
+     * Initialize the Specialty Pizza Menu and ComboBox.
+     * @param url URL
+     * @param resourceBundle ResourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<String> items = FXCollections.observableArrayList("Deluxe", "Supreme", "Meatzza", "Seafood", "Pepperoni");
@@ -41,12 +46,21 @@ public class SpecialtyPizzaController implements Initializable {
         specialtyComboBox.setOnAction(this::setPizza);
     }
 
+    /**
+     * Convert a double pizza price to a String rounded to two decimal places.
+     * @param price double pizza price
+     * @return String format of price
+     */
     private String formatDouble(double price) {
         DecimalFormat format = new DecimalFormat("#.##");
         price = Double.parseDouble(format.format(price));
         return String.valueOf(price);
     }
 
+    /**
+     * Set Specialty Pizza Menu on ComboBox action.
+     * @param event ActionEvent
+     */
     @FXML
     void setPizza(ActionEvent event) {
         String pizzaType = specialtyComboBox.getValue();
@@ -68,11 +82,17 @@ public class SpecialtyPizzaController implements Initializable {
         setToppings();
     }
 
+    /**
+     * Set ListView to the toppings of the chosen pizza.
+     */
     @FXML
     private void setToppings() {
         specialtyToppings.setItems(FXCollections.observableArrayList(pizza.toppings));
     }
 
+    /**
+     * Set Sauce Text Area to the sauce of the chosen pizza.
+     */
     @FXML
     private void setSauce() {
         if (pizza.sauce == Sauce.TOMATO) {
@@ -83,12 +103,19 @@ public class SpecialtyPizzaController implements Initializable {
         }
     }
 
+    /**
+     * Set Price Text Area to the price of the chosen pizza and its attributes.
+     */
     @FXML
     private void setPrice() {
         String price = formatDouble(pizza.price());
         specialtyPrice.setText(price);
     }
 
+    /**
+     * Set pizza size attribute to the size chosen.
+     * @param event ActionEvent
+     */
     @FXML
     void setSize(ActionEvent event) {
         if (specialtySmall.isSelected()) {
@@ -103,6 +130,10 @@ public class SpecialtyPizzaController implements Initializable {
         setPrice();
     }
 
+    /**
+     * Set pizza extraCheese and extraSauce attributes based on selections.
+     * @param event ActionEvent
+     */
     @FXML
     void setExtras(ActionEvent event) {
         if (specialtyExtraCheese.isSelected()) {
