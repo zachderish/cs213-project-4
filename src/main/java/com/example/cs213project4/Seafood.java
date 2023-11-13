@@ -19,7 +19,7 @@ public class Seafood extends Pizza{
     public double price(){
         double finalPrice = PRICE;
         if(this.size == Size.MEDIUM){
-            finalprice+= 2;
+            finalPrice+= 2;
         }
         if(this.size == Size.LARGE){
             finalPrice+=4;
