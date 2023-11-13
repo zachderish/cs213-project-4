@@ -8,6 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,11 +20,6 @@ import static com.example.cs213project4.PizzaMaker.createPizza;
 
 public class BuildYourOwnController implements Initializable {
 
-    /**
-     * Button handler for back button.
-     * @param event ActionEvent
-     */
-
     @FXML
     private ChoiceBox<String> buildOwnChoiceBox;
     @FXML
@@ -31,7 +28,7 @@ public class BuildYourOwnController implements Initializable {
     private RadioButton byoTomatoButton, byoAlfredoButton;
     @FXML
     private CheckBox byoExtraSauceButton, byoExtraCheeseButton;
-    ImageView  image = new Image(getClass().getResourceAsStream("shaq.jpg"));
+    //ImageView image = new Image(getClass().getResourceAsStream("shaq.jpg"));
     private final String[] pizzaSizes = {"Small", "Medium", "Large"};
 
     private BuildYourOwn pizza = (BuildYourOwn) createPizza("BuildYourOwn");
@@ -54,6 +51,10 @@ public class BuildYourOwnController implements Initializable {
         buildOwnChoiceBox.setOnAction(this::setPizzaSize);
     }
 
+    /**
+     * Button handler for back button.
+     * @param event ActionEvent
+     */
     @FXML
     protected void onBackButtonClick(ActionEvent event) throws IOException {
         Parent mainMenuRoot = FXMLLoader.load(getClass().getResource("main-menu.fxml"));
@@ -65,7 +66,7 @@ public class BuildYourOwnController implements Initializable {
         stage.setScene(mainMenuScene);
         stage.show();
     }
-@FXML
+    @FXML
     void setPizzaSize(ActionEvent event){
         String size = buildOwnChoiceBox.getValue().toUpperCase();
         if(size.equals(Size.SMALL.toString())){

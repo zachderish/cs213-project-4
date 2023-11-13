@@ -39,10 +39,13 @@
                         <RowConstraints maxHeight="111.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ComboBox prefWidth="150.0" />
-                        <RadioButton mnemonicParsing="false" text="Small" GridPane.rowIndex="1" />
-                        <RadioButton mnemonicParsing="false" text="Medium" GridPane.rowIndex="2" />
-                        <RadioButton mnemonicParsing="false" text="Large" GridPane.rowIndex="3" />
+                        <ComboBox fx:id="specialtyComboBox" prefWidth="150.0" />
+                        <RadioButton fx:id="specialtySmall" disable="true" mnemonicParsing="false" onAction="#setSize" selected="true" text="Small" GridPane.rowIndex="1">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="specialtySize" />
+                           </toggleGroup></RadioButton>
+                        <RadioButton fx:id="specialtyMedium" disable="true" mnemonicParsing="false" onAction="#setSize" text="Medium" toggleGroup="$specialtySize" GridPane.rowIndex="2" />
+                        <RadioButton fx:id="specialtyLarge" disable="true" mnemonicParsing="false" onAction="#setSize" text="Large" toggleGroup="$specialtySize" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                   <GridPane GridPane.rowIndex="1">
@@ -62,7 +65,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <ListView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                        <ListView fx:id="specialtyToppings" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                   <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -84,24 +87,20 @@
                               <Insets left="125.0" />
                            </GridPane.margin>
                         </Label>
-                        <TextArea maxHeight="25.0" maxWidth="200.0" prefHeight="25.0" prefWidth="200.0" GridPane.rowIndex="1">
-                           <GridPane.margin>
-                              <Insets left="50.0" />
-                           </GridPane.margin>
-                        </TextArea>
-                        <CheckBox mnemonicParsing="false" text="Extra Sauce" GridPane.rowIndex="2">
+                        <CheckBox fx:id="specialtyExtraSauce" disable="true" mnemonicParsing="false" onAction="#setExtras" text="Extra Sauce" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets left="50.0" />
                            </GridPane.margin>
                         </CheckBox>
-                        <CheckBox mnemonicParsing="false" text="Extra Cheese" GridPane.rowIndex="3">
+                        <CheckBox fx:id="specialtyExtraCheese" disable="true" mnemonicParsing="false" onAction="#setExtras" text="Extra Cheese" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets left="50.0" />
                            </GridPane.margin>
                         </CheckBox>
+                        <TextField fx:id="specialtySauce" editable="false" maxWidth="150.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                      </children>
                   </GridPane>
-                  <Button mnemonicParsing="false" text="Add to Order" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Button fx:id="specialtyAddBtn" disable="true" mnemonicParsing="false" text="Add to Order" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -126,7 +125,7 @@
                               <Insets left="50.0" />
                            </GridPane.margin>
                         </Label>
-                        <TextArea maxHeight="40.0" maxWidth="150.0" prefHeight="40.0" prefWidth="150.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="specialtyPrice" editable="false" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
                </children>

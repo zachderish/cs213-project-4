@@ -20,16 +20,16 @@ public class Deluxe extends Pizza{
     public double price(){
         double finalPrice = PRICE;
         if(this.size == Size.MEDIUM){
-              finalPrice+= 2;
+              finalPrice += 2.0;
         }
         if(this.size == Size.LARGE){
-            finalPrice+=4;
+            finalPrice += 4.0;
         }
         if(this.extraCheese){
-            finalPrice+=1;
+            finalPrice += 1.0;
         }
         if(this.extraSauce){
-            finalPrice+=1;
+            finalPrice += 1.0;
         }
 
         return finalPrice;
