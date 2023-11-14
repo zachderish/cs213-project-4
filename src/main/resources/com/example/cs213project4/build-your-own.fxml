@@ -70,17 +70,17 @@
                               <Insets left="40.0" />
                            </GridPane.margin>
                         </Label>
-                        <ListView maxWidth="180.0" prefHeight="200.0" prefWidth="180.0" GridPane.rowIndex="1">
+                        <ListView fx:id="additionalToppingsList" maxWidth="180.0" prefHeight="200.0" prefWidth="180.0" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="20.0" />
                            </GridPane.margin>
                         </ListView>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" text="Add &gt;&gt;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Button fx:id="addButton" mnemonicParsing="false" onAction="#addToppings" prefHeight="25.0" prefWidth="79.0" text="Add &gt;&gt;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets bottom="50.0" left="50.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" text="&lt;&lt; Remove" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Button fx:id="removeButton" mnemonicParsing="false" onAction="#removeToppings" prefHeight="25.0" prefWidth="79.0" text="&lt;&lt; Remove" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="50.0" top="50.0" />
                            </GridPane.margin>
@@ -104,7 +104,7 @@
                               <Insets left="20.0" />
                            </GridPane.margin>
                         </Label>
-                        <ListView maxWidth="180.0" prefHeight="200.0" prefWidth="180.0" GridPane.rowIndex="1" />
+                        <ListView fx:id="selectedToppingsList" maxWidth="180.0" prefHeight="200.0" prefWidth="180.0" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                   <GridPane maxHeight="150.0" prefHeight="150.0" prefWidth="387.0" GridPane.rowIndex="2">
