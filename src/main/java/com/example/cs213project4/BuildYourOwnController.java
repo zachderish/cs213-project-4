@@ -72,6 +72,8 @@ public class BuildYourOwnController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         buildOwnChoiceBox.getItems().addAll(pizzaSizes);
+        buildOwnChoiceBox.setValue(buildOwnChoiceBox.getItems().get(0));
+        byoTomatoButton.setSelected(true);
         buildOwnChoiceBox.setOnAction(this::setPizzaSize);
 
         additionalToppingsList.getItems().addAll(pizzaToppings);
@@ -205,15 +207,6 @@ public class BuildYourOwnController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("No Selection");
         alert.setContentText("Please Click On The Topping To Be Removed/Added");
-        alert.showAndWait();
-    }
-    /**
-     * Method to send alert when no size is selected
-     */
-    void noSizeSelectedAlert(){
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("No Selection");
-        alert.setContentText("No Size Specified; Size Will Default to Small");
         alert.showAndWait();
     }
 
