@@ -14,7 +14,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -189,7 +188,7 @@ public class SpecialtyPizzaController implements Initializable {
      * @param event ActionEvent
      */
     @FXML
-    protected void onBackButtonClick(ActionEvent event) throws IOException {
+    void onBackButtonClick(ActionEvent event) throws IOException {
         Parent mainMenuRoot = FXMLLoader.load(getClass().getResource("main-menu.fxml"));
         Scene mainMenuScene = new Scene(mainMenuRoot);
 
@@ -198,5 +197,10 @@ public class SpecialtyPizzaController implements Initializable {
 
         stage.setScene(mainMenuScene);
         stage.show();
+    }
+
+    @FXML
+    void onAddOrderClick(ActionEvent event) {
+
     }
 }

@@ -103,7 +103,7 @@
                         <TextField fx:id="specialtySauce" editable="false" maxWidth="150.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                      </children>
                   </GridPane>
-                  <Button fx:id="specialtyAddBtn" disable="true" mnemonicParsing="false" text="Add to Order" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Button fx:id="specialtyAddBtn" disable="true" mnemonicParsing="false" onAction="#onAddOrderClick" text="Add to Order" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font size="20.0" />
                      </font>

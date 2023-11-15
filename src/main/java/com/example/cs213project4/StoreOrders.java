@@ -6,7 +6,7 @@ public class StoreOrders {
 
     private ArrayList<Order> storeOrders; //this will be the only instance variable used for construction
 
-    public static int orderNumber = 0; //static variable as requested in instructions
+    private static int orderNumber = 1; //static variable as requested in instructions
 
     public StoreOrders(){
         this.storeOrders = new ArrayList<>();
@@ -15,4 +15,14 @@ public class StoreOrders {
         this.storeOrders = storeOrders;
     }
     //will add more later
+
+    public ArrayList<Order> getStoreOrders() {
+        return storeOrders;
+    }
+
+    public int getAvailable_OrderNumber() {
+        int returnNum = orderNumber;
+        orderNumber++;
+        return returnNum;
+    }
 }
