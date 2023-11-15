@@ -10,8 +10,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -30,6 +33,8 @@ public class SpecialtyPizzaController implements Initializable {
     private TextField specialtyPrice, specialtySauce;
     @FXML
     private ListView<Topping> specialtyToppings;
+    @FXML
+    private ImageView pizzaImage;
 
     private Pizza pizza;
 
@@ -80,7 +85,35 @@ public class SpecialtyPizzaController implements Initializable {
         setPrice();
         setSauce();
         setToppings();
+        setImage(pizzaType);
     }
+
+    @FXML
+    private void setImage(String pizzaType) {
+
+        String relativePath = "src/main/resources/com/example/cs213project4/";
+        if (pizzaType.equals("Deluxe")) {
+            Image image = new Image("file:" +  relativePath + "deluxe.jpg");
+            pizzaImage.setImage(image);
+        }
+        if (pizzaType.equals("Meatzza")) {
+            Image image = new Image("file:" +  relativePath + "meatzza.jpg");
+            pizzaImage.setImage(image);
+        }
+        if (pizzaType.equals("Pepperoni")) {
+            Image image = new Image("file:" +  relativePath + "pepperoni.jpg");
+            pizzaImage.setImage(image);
+        }
+        if (pizzaType.equals("Seafood")) {
+            Image image = new Image("file:" +  relativePath + "seafood.jpg");
+            pizzaImage.setImage(image);
+        }
+        if (pizzaType.equals("Supreme")) {
+            Image image = new Image("file:" +  relativePath + "supreme.jpg");
+            pizzaImage.setImage(image);
+        }
+    }
+
 
     /**
      * Set ListView to the toppings of the chosen pizza.
