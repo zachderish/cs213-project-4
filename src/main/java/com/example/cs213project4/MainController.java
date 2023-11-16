@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MainController {
+    private StoreOrders orders = new StoreOrders();
+
 
     /**
      * Button handler for Specialty Pizzas.
@@ -23,7 +25,9 @@ public class MainController {
      */
     @FXML
     protected void onSpecialtyPizzaClick(ActionEvent event) throws IOException {
-        Parent specialtyPizzaRoot = FXMLLoader.load(getClass().getResource("specialty-pizza.fxml"));
+        FXMLLoader pizzaLoader = new FXMLLoader(getClass().getResource("specialty-pizza.fxml"));
+
+        Parent specialtyPizzaRoot = pizzaLoader.load();
         Scene specialtyPizzaScene = new Scene(specialtyPizzaRoot);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -31,6 +35,8 @@ public class MainController {
 
         stage.setScene(specialtyPizzaScene);
         stage.show();
+        SpecialtyPizzaController specialtyPizzaController = pizzaLoader.getController();
+        specialtyPizzaController.setMainController(this);
     }
 
     /**
@@ -55,14 +61,19 @@ public class MainController {
      */
     @FXML
     protected void onCurrentOrderClick(ActionEvent event) throws IOException {
-        Parent currentOrderRoot = FXMLLoader.load(getClass().getResource("current-order.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("current-order.fxml"));
+
+        Parent currentOrderRoot = loader.load();
         Scene currentOrderScene = new Scene(currentOrderRoot);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setTitle("Current Order");
+        stage.setTitle("Current Orders");
 
         stage.setScene(currentOrderScene);
         stage.show();
+
+        CurrentOrderController currentOrderController = loader.getController();
+        currentOrderController.setMainController(this);
     }
 
     /**
@@ -79,5 +90,9 @@ public class MainController {
 
         stage.setScene(storeOrdersScene);
         stage.show();
+    }
+
+    public StoreOrders getStoreOrders() {
+        return orders;
     }
 }

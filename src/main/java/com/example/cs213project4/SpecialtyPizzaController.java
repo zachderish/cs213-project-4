@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class SpecialtyPizzaController implements Initializable {
@@ -36,6 +37,7 @@ public class SpecialtyPizzaController implements Initializable {
     private ImageView pizzaImage;
 
     private Pizza pizza;
+    private MainController mainController;
 
     /**
      * Initialize the Specialty Pizza Menu and ComboBox.
@@ -199,8 +201,24 @@ public class SpecialtyPizzaController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Button handler for add order, adds pizza to order array list.
+     * @param event ActionEvent
+     */
     @FXML
     void onAddOrderClick(ActionEvent event) {
+        StoreOrders orders = mainController.getStoreOrders();
+        int currentOrderNumber = orders.getAvailable_OrderNumber();
 
+        Order currentOrder = orders.getStoreOrders().get(currentOrderNumber);
+        currentOrder.addPizza(pizza);
+    }
+
+    /**
+     * Get the reference to the MainController object.
+     * @param controller MainController
+     */
+    public void setMainController(MainController controller) {
+        mainController = controller;
     }
 }

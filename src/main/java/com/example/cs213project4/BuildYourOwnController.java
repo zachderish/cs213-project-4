@@ -124,7 +124,7 @@ public class BuildYourOwnController implements Initializable {
      */
     @FXML
     void updatePrice(ActionEvent event){
-    byoTextArea.setText(Double.toString(pizza.price()));
+        byoTextArea.setText(Double.toString(pizza.price()));
     }
 
     /**
