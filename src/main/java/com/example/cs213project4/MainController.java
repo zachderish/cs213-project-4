@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MainController {
-    private StoreOrders orders = new StoreOrders();
+    private static StoreOrders orders = new StoreOrders();
 
 
     /**
@@ -92,6 +92,10 @@ public class MainController {
         stage.show();
     }
 
+    /**
+     * Get the current StoreOrders object.
+     * @return StoreOrders
+     */
     public StoreOrders getStoreOrders() {
         return orders;
     }

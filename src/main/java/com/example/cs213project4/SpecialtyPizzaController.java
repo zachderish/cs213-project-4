@@ -212,6 +212,10 @@ public class SpecialtyPizzaController implements Initializable {
 
         Order currentOrder = orders.getStoreOrders().get(currentOrderNumber);
         currentOrder.addPizza(pizza);
+        ArrayList<String> pizzas = currentOrder.getPizzas();
+        System.out.println(pizzas);
+
+        pizzaAddedPopup();
     }
 
     /**
@@ -221,4 +225,15 @@ public class SpecialtyPizzaController implements Initializable {
     public void setMainController(MainController controller) {
         mainController = controller;
     }
+
+    /**
+     * Create popup for successful pizza added.
+     */
+    void pizzaAddedPopup() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Pizza Added");
+        alert.setContentText("Pizza added successfully to your order!");
+        alert.showAndWait();
+    }
+
 }

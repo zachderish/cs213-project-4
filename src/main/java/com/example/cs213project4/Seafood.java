@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Seafood extends Pizza{
 
     public static final double PRICE = 17.99;
+    private final String type = "Seafood";
 
     public Seafood(){
         ArrayList<Topping> toppings = new ArrayList<>();
@@ -31,5 +32,14 @@ public class Seafood extends Pizza{
             finalPrice += 1;
         }
         return finalPrice;
+    }
+
+    /**
+     * Seafood Pizza String format.
+     * @return String
+     */
+    @Override
+    public String toString() {
+        return "[" + type + "] " + super.toString();
     }
 }

@@ -20,13 +20,36 @@ public class Order {
         this.pizzaList.add(pizza);
     }
 
-    public void removePizza(Pizza pizza){
-        this.pizzaList.remove(pizza);
+    public void removePizza(int index){
+        this.pizzaList.remove(index);
     }
 
     public int getOrderNumber(){
         return this.orderNumber;
     }
 
+    /**
+     * Get list of Pizza Strings for order.
+     * @return ArrayList<String>
+     */
+    public ArrayList<String> getPizzas() {
+        ArrayList<String> pizzas = new ArrayList<>();
+        for (int i = 0; i < this.pizzaList.size(); i++) {
+            pizzas.add(this.pizzaList.get(i).toString());
+        }
+        return pizzas;
+    }
+
+    /**
+     * Get the subtotal for order
+     * @return double
+     */
+    public double getOrder_Subtotal() {
+        double returnVal = 0.0;
+        for (int i = 0; i < this.pizzaList.size(); i++) {
+            returnVal += this.pizzaList.get(i).price();
+        }
+        return returnVal;
+    }
 
 }

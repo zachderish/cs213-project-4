@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class Supreme extends Pizza{
     public static final double PRICE = 15.99;
+    private final String type = "Supreme";
+
     public Supreme(){
         ArrayList<Topping> toppings = new ArrayList<>();
         toppings.add(Topping.SAUSAGE);
@@ -32,5 +34,14 @@ public class Supreme extends Pizza{
             finalPrice+=1;
         }
         return finalPrice;
+    }
+
+    /**
+     * Supreme Pizza String format.
+     * @return String
+     */
+    @Override
+    public String toString() {
+        return "[" + type + "] " + super.toString();
     }
 }
