@@ -131,12 +131,18 @@
                         </TextArea>
                      </children>
                   </GridPane>
-                  <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="137.0" text="Add to Order" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Button fx:id="orderButton" mnemonicParsing="false" onAction="#addOrderButton" prefHeight="34.0" prefWidth="137.0" text="Add to Order" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <ImageView fx:id="image" fitHeight="176.0" fitWidth="361.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="byoImage" fitHeight="176.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
+                     <GridPane.margin>
+                        <Insets left="15.0" />
+                     </GridPane.margin>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport></ImageView>
                </children>
             </GridPane>
          </left>

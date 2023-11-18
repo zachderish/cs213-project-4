@@ -45,7 +45,10 @@ public class MainController {
      */
     @FXML
     protected void onBuildYourOwnClick(ActionEvent event) throws IOException {
-        Parent buildYourOwnRoot = FXMLLoader.load(getClass().getResource("build-your-own.fxml"));
+
+        FXMLLoader loadMe = new FXMLLoader(getClass().getResource("build-your-own.fxml"));
+
+        Parent buildYourOwnRoot = loadMe.load();
         Scene buildYourOwnScene = new Scene(buildYourOwnRoot);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -53,6 +56,8 @@ public class MainController {
 
         stage.setScene(buildYourOwnScene);
         stage.show();
+        BuildYourOwnController byoController = loadMe.getController();
+        byoController.setMainController(this);
     }
 
     /**
@@ -82,7 +87,9 @@ public class MainController {
      */
     @FXML
     protected void onStoreOrdersClick(ActionEvent event) throws IOException {
-        Parent storeOrdersRoot = FXMLLoader.load(getClass().getResource("store-orders.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("store-orders.fxml"));
+
+        Parent storeOrdersRoot = loader.load();
         Scene storeOrdersScene = new Scene(storeOrdersRoot);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -90,6 +97,9 @@ public class MainController {
 
         stage.setScene(storeOrdersScene);
         stage.show();
+
+        StoreOrdersController storeOrdersController = loader.getController();
+        storeOrdersController.setMainController(this);
     }
 
     /**

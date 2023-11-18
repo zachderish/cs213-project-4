@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.ResourceBundle;
 
@@ -32,8 +33,10 @@ public class BuildYourOwnController implements Initializable {
     @FXML
     private ListView<String> additionalToppingsList, selectedToppingsList;
     @FXML
-    private Button addButton, removeButton;
-    //ImageView image = new Image(getClass().getResourceAsStream("shaq.jpg"));
+    private Button addButton, removeButton, orderButton;
+    @FXML
+    private ImageView byoImage;
+    private MainController mainController;
     private final String[] pizzaSizes = {"Small", "Medium", "Large"};
 
 
@@ -74,6 +77,10 @@ public class BuildYourOwnController implements Initializable {
         buildOwnChoiceBox.getItems().addAll(pizzaSizes);
         buildOwnChoiceBox.setValue(buildOwnChoiceBox.getItems().get(0));
         byoTomatoButton.setSelected(true);
+        String relativePath = "src/main/resources/com/example/cs213project4/";
+        Image image = new Image("file:" +  relativePath + "doggo.jpg"); //will change to actual pizza later
+        byoImage.setImage(image);
+
         buildOwnChoiceBox.setOnAction(this::setPizzaSize);
 
         additionalToppingsList.getItems().addAll(pizzaToppings);
@@ -182,7 +189,7 @@ public class BuildYourOwnController implements Initializable {
         if(input.equals("Green Peppers")){
             return Topping.GREEN_PEPPERS;
         }
-        if(input.equals("Black Olives")){
+        if(input.equals("Black Olive")){
             return Topping.BLACK_OLIVE;
         }
 
@@ -250,6 +257,41 @@ public class BuildYourOwnController implements Initializable {
         selectedToppingsList.getItems().remove(currentTopping);
         additionalToppingsList.getItems().add(currentTopping);
         updatePrice(event);
+    }
+
+    /**
+     * Get the reference to the MainController object.
+     * @param controller MainController
+     */
+    public void setMainController(MainController controller) {
+        mainController = controller;
+    }
+
+    /**
+     *Alert for adding a new pizza
+     */
+    void pizzaAddedPopup() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Pizza Added");
+        alert.setContentText("Pizza added successfully to your order!");
+        alert.showAndWait();
+    }
+
+    /**
+     * Button handler for add order, adds pizza to order array list.
+     * @param event ActionEvent
+     */
+    @FXML
+    void addOrderButton(ActionEvent event) {
+        StoreOrders orders = mainController.getStoreOrders();
+        int currentOrderNumber = orders.getAvailable_OrderNumber();
+
+        Order currentOrder = orders.getStoreOrders().get(currentOrderNumber);
+        currentOrder.addPizza(pizza);
+        ArrayList<String> pizzas = currentOrder.getPizzas();
+        System.out.println(pizzas);
+
+        pizzaAddedPopup();
     }
 
 }

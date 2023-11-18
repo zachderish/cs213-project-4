@@ -37,4 +37,14 @@ public class StoreOrders {
         Order setOrder = new Order(orderNumber, pizzaList);
         this.storeOrders.add(setOrder);
     }
+
+    public int[] getOrderNumbers(){
+        int[] orderNums = new int[this.storeOrders.size()];
+        for(int i = 0; i<orderNums.length; i++){
+            int tempNum = this.storeOrders.get(i).getOrderNumber();
+            orderNums[i] = tempNum;
+        }
+        return orderNums;
+    }
+
 }
