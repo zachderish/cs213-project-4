@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class StoreOrdersController implements Initializable {
@@ -71,15 +70,11 @@ void noPizzaAlert(){
            noPizzaAlert();
            return;
        }
+
         currentOrderNumbers = orders.getOrderNumbers();
-        soBox.getItems().addAll(currentOrderNumbers);
-       // int currentNum = currentOrderNumbers.get(0);
-       // soBox.setValue(currentNum);
-        //setPrice();
-
+        ObservableList<Integer> test = FXCollections.observableArrayList(currentOrderNumbers);
+        soBox.setItems(test);
         soBox.setOnAction(this::displayPizzas);
-       // orderList.getItems().addAll(pizzaString);
-
 
     }
 
@@ -93,13 +88,6 @@ void noPizzaAlert(){
         totalText.setText(totalString);
     }
 
-    @FXML
-    void updateChoiceBox(ActionEvent event,int orderNumber){
-        soBox.getItems().remove(orderNumber);
-
-
-
-    }
 
     @FXML
     void displayPizzas(ActionEvent event){
@@ -110,9 +98,6 @@ void noPizzaAlert(){
             return;
         }
 
-        orders = mainController.getStoreOrders();
-        ArrayList<Integer> currentOrderNumbers = orders.getOrderNumbers();
-        soBox.getItems().addAll(currentOrderNumbers);
         orders = new MainController().getReference().getStoreOrders();
 
         Order selectedOrder = orders.find(soBox.getValue());
@@ -138,6 +123,13 @@ void noPizzaAlert(){
         alert.setContentText("Cannot Cancel, No Pizzas Selected");
         alert.showAndWait();
     }
+
+    void cancelSuccess(int orderNumber){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Cancel Success");
+        alert.setContentText("Order Number" + orderNumber + "Cancelled");
+        alert.showAndWait();
+    }
     @FXML
     void cancelOrder(ActionEvent event){
         if(soBox.getValue() == null){
@@ -155,9 +147,9 @@ void noPizzaAlert(){
             emptyCancelAlert(event);
             return;
         }
-        boolean removeMe = orders.removeOrder(soBox.getValue());
-        updateChoiceBox(event, currentNumb);
+        boolean removeMe = orders.removeOrder(currentNumb);
         displayPizzas(event);
+        cancelSuccess(currentNumb);
 
 
     }

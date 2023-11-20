@@ -1,5 +1,6 @@
 package com.example.cs213project4;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,5 +67,35 @@ public class StoreOrders {
     public int numberOfOrders(){
         return this.storeOrders.size();
     }
+
+    public String OrderToString(int index){
+       Order order = storeOrders.get(index);
+       int orderNumber = order.getOrderNumber();
+       String exCheese = "EXTRA CHEESE";
+       String exSauce = "EXTRA SAUCE";
+       double total = order.getOrder_Subtotal();
+       double tax = 0.06625;
+       total = (total*tax) + total;
+
+       String returnString = "Order Number " + Integer.toString(orderNumber);
+       ArrayList<String> pizzaStrings = order.getPizzas();
+       if(pizzaStrings.isEmpty()){
+           return "";
+       }
+       for(int i =0; i<pizzaStrings.size(); i++){
+           returnString += "\n" + pizzaStrings.get(i);
+           if(order.getPizza(i).extraCheese){
+               returnString += " " + exCheese;
+           }
+           if(order.getPizza(i).extraSauce){
+               returnString += " " + exSauce;
+           }
+       }
+       String totalString = new DecimalFormat("#,##0.00").format(total);
+       returnString+= "\n" + totalString;
+       return returnString;
+    }
+
+
 
 }

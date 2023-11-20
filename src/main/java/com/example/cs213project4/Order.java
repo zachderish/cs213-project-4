@@ -52,4 +52,8 @@ public class Order {
         return returnVal;
     }
 
+    public Pizza getPizza(int index){
+        return pizzaList.get(i);
+    }
+
 }

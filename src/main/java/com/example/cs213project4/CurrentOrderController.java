@@ -70,8 +70,8 @@ public class CurrentOrderController {
     @FXML
     void setPizzas() {
         int currentOrderNum = mainController.getStoreOrders().getAvailable_OrderNumber();
-        ArrayList<Order> orders = mainController.getStoreOrders().getStoreOrders();
-        Order currentOrder = orders.get(currentOrderNum);
+        StoreOrders orders = mainController.getStoreOrders();//.getStoreOrders();
+        Order currentOrder = orders.find(currentOrderNum);
         ArrayList<String> pizzas = currentOrder.getPizzas();
 
         ObservableList<String> pizzaString = FXCollections.observableArrayList(pizzas);
@@ -85,8 +85,8 @@ public class CurrentOrderController {
     @FXML
     void setPrices() {
         int currentOrderNum = mainController.getStoreOrders().getAvailable_OrderNumber();
-        ArrayList<Order> orders = mainController.getStoreOrders().getStoreOrders();
-        Order currentOrder = orders.get(currentOrderNum);
+        StoreOrders orders = mainController.getStoreOrders();
+        Order currentOrder = orders.find(currentOrderNum);
 
         double subtotalDouble = currentOrder.getOrder_Subtotal();
         String subtotalString = new DecimalFormat("#,##0.00").format(subtotalDouble);
@@ -108,8 +108,8 @@ public class CurrentOrderController {
         SelectionModel<String> selected = orderTextArea.getSelectionModel();
         int selectedIndex = selected.getSelectedIndex();
 
-        ArrayList<Order> orders = mainController.getStoreOrders().getStoreOrders();
-        Order currentOrder = orders.get(mainController.getStoreOrders().getAvailable_OrderNumber());
+        StoreOrders orders = mainController.getStoreOrders();
+        Order currentOrder = orders.find(mainController.getStoreOrders().getAvailable_OrderNumber());
         currentOrder.removePizza(selectedIndex);
         setPizzas();
         setPrices();
@@ -124,13 +124,13 @@ public class CurrentOrderController {
         int currIndex = mainController.getStoreOrders().getAvailable_OrderNumber();
         StoreOrders orders = mainController.getStoreOrders();
 
-        ArrayList<String> pizzaList = orders.getStoreOrders().get(currIndex).getPizzas();
+        ArrayList<String> pizzaList = orders.find(currIndex).getPizzas();
         if (pizzaList.isEmpty()) {
             emptyPizzaPopup();
             return;
         }
 
-        orders.addOrder(orders.getStoreOrders().get(currIndex));
+        orders.addOrder(orders.find(currIndex));
         setPizzas();
         setPrices();
         setOrderNumber();
