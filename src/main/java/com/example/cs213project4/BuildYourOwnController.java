@@ -245,6 +245,7 @@ public class BuildYourOwnController implements Initializable {
         }
         tooManyToppingsAlert();
     }
+
     /**
      * Method to remove selected toppings from build your own pizza
      * @param event, when remove button is selected
