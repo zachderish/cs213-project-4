@@ -53,7 +53,7 @@ public class Order {
     }
 
     public Pizza getPizza(int index){
-        return pizzaList.get(i);
+        return pizzaList.get(index);
     }
 
 }

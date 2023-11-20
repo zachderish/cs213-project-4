@@ -20,8 +20,6 @@ import java.util.ResourceBundle;
 
 public class StoreOrdersController implements Initializable {
 
-
-
     @FXML
     private ListView<String> orderList;
     @FXML
@@ -34,10 +32,11 @@ public class StoreOrdersController implements Initializable {
     private MainController mainController = new MainController().getReference();
     private StoreOrders orders;
 
-   private ArrayList<Integer> currentOrderNumbers;
+    private ArrayList<Integer> currentOrderNumbers;
 
     /**
      * Button handler for back button.
+     *
      * @param event ActionEvent
      */
     @FXML
@@ -57,29 +56,34 @@ public class StoreOrdersController implements Initializable {
     }
 
 
-void noPizzaAlert(){
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setTitle("No Pizza");
-    alert.setContentText("No Pizza Orders Placed");
-    alert.showAndWait();
-}
+    void noPizzaAlert() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("No Pizza");
+        alert.setContentText("No Pizza Orders Placed");
+        alert.showAndWait();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-       orders = mainController.getStoreOrders();
-       if(orders.numberOfOrders() == 0){
-           noPizzaAlert();
-           return;
-       }
-
+        orders = mainController.getStoreOrders();
+        if (orders.numberOfOrders() == 0) {
+            noPizzaAlert();
+            return;
+        }
         currentOrderNumbers = orders.getOrderNumbers();
-        ObservableList<Integer> test = FXCollections.observableArrayList(currentOrderNumbers);
-        soBox.setItems(test);
+        soBox.getItems().addAll(currentOrderNumbers);
+        // int currentNum = currentOrderNumbers.get(0);
+        // soBox.setValue(currentNum);
+        //setPrice();
+
         soBox.setOnAction(this::displayPizzas);
+        // orderList.getItems().addAll(pizzaString);
+
 
     }
 
 
-    void setPrice(){
+    void setPrice() {
         int orderNum = soBox.getValue();
         double taxes = 0.06625;
         double subtotal = orders.find(orderNum).getOrder_Subtotal();
@@ -88,10 +92,17 @@ void noPizzaAlert(){
         totalText.setText(totalString);
     }
 
+    @FXML
+    void updateChoiceBox(ActionEvent event, int orderNumber) {
+        soBox.getItems().removeAll(currentOrderNumbers);
+        currentOrderNumbers = mainController.getStoreOrders().getOrderNumbers();
+        soBox.getItems().addAll(currentOrderNumbers);
+
+    }
 
     @FXML
-    void displayPizzas(ActionEvent event){
-        if(soBox.getValue()==null || orders.numberOfOrders() ==0){
+    void displayPizzas(ActionEvent event) {
+        if (soBox.getValue() == null || orders.numberOfOrders() == 0) {
             noPizzaAlert();
             totalText.setText("");
             orderList.setItems(null);
@@ -109,7 +120,7 @@ void noPizzaAlert(){
     }
 
     @FXML
-    void emptyCancelAlert(ActionEvent event){
+    void emptyCancelAlert(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Cancel Error");
         alert.setContentText("Cannot Cancel, No Pizzas In Order");
@@ -117,26 +128,20 @@ void noPizzaAlert(){
     }
 
     @FXML
-    void nullAlert(ActionEvent event){
+    void nullAlert(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Cancel Error");
         alert.setContentText("Cannot Cancel, No Pizzas Selected");
         alert.showAndWait();
     }
 
-    void cancelSuccess(int orderNumber){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Cancel Success");
-        alert.setContentText("Order Number" + orderNumber + "Cancelled");
-        alert.showAndWait();
-    }
     @FXML
-    void cancelOrder(ActionEvent event){
-        if(soBox.getValue() == null){
+    void cancelOrder(ActionEvent event) {
+        if (soBox.getValue() == null) {
             nullAlert(event);
             return;
         }
-        if(orders.numberOfOrders() == 0){
+        if (orders.numberOfOrders() == 0) {
             nullAlert(event);
             return;
         }
@@ -147,13 +152,11 @@ void noPizzaAlert(){
             emptyCancelAlert(event);
             return;
         }
-        boolean removeMe = orders.removeOrder(currentNumb);
+        boolean removeMe = orders.removeOrder(soBox.getValue());
+        updateChoiceBox(event, currentNumb);
         displayPizzas(event);
-        cancelSuccess(currentNumb);
 
 
     }
-
-
 
 }
