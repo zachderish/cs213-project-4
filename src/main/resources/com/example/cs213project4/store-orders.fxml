@@ -61,14 +61,14 @@
                               <Insets left="20.0" />
                            </GridPane.margin>
                         </Label>
-                        <ChoiceBox fx:id="storeOrderChoiceBox" prefHeight="25.0" prefWidth="112.0" GridPane.rowIndex="1">
+                        <ChoiceBox fx:id="soBox" prefHeight="25.0" prefWidth="112.0" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="110.0" />
                            </GridPane.margin>
                         </ChoiceBox>
                      </children>
                   </GridPane>
-                  <ListView maxWidth="580.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                  <ListView fx:id="orderList" maxWidth="580.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
@@ -82,7 +82,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button maxWidth="121.0" mnemonicParsing="false" text="Cancel Orders" GridPane.halignment="RIGHT">
+                        <Button fx:id="cancelButton" maxWidth="121.0" mnemonicParsing="false" onAction="#cancelOrder" text="Cancel Orders" GridPane.halignment="RIGHT">
                            <GridPane.margin>
                               <Insets right="40.0" />
                            </GridPane.margin>

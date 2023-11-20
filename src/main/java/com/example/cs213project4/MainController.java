@@ -109,4 +109,9 @@ public class MainController {
     public StoreOrders getStoreOrders() {
         return orders;
     }
+
+    public MainController getReference(){
+        return this;
+    }
 }
+

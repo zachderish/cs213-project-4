@@ -1,6 +1,7 @@
 package com.example.cs213project4;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class StoreOrders {
 
@@ -38,13 +39,32 @@ public class StoreOrders {
         this.storeOrders.add(setOrder);
     }
 
-    public int[] getOrderNumbers(){
-        int[] orderNums = new int[this.storeOrders.size()];
-        for(int i = 0; i<orderNums.length; i++){
+    public ArrayList<Integer> getOrderNumbers(){
+        ArrayList<Integer> orderNums = new ArrayList<>();
+        for(int i = 0; i<this.storeOrders.size(); i++){
             int tempNum = this.storeOrders.get(i).getOrderNumber();
-            orderNums[i] = tempNum;
+            orderNums.add(tempNum);
         }
         return orderNums;
+    }
+
+    public Order find(int orderNumber){
+        for(int i =0; i<this.storeOrders.size(); i++){
+            if(this.storeOrders.get(i).getOrderNumber() == orderNumber){
+                return storeOrders.get(i);
+            }
+        }
+        return storeOrders.get(0);
+    }
+
+    public boolean removeOrder(int orderNumber){
+        Order removeMe = find(orderNumber);
+        this.storeOrders.remove(removeMe);
+        return true;
+    }
+
+    public int numberOfOrders(){
+        return this.storeOrders.size();
     }
 
 }
