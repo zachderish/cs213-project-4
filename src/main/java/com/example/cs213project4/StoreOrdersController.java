@@ -27,7 +27,7 @@ public class StoreOrdersController implements Initializable {
     @FXML
     private ChoiceBox<Integer> soBox;
     @FXML
-    private Button cancelButton;
+    private Button cancelButton, exportButton;
 
     private MainController mainController = new MainController().getReference();
     private StoreOrders orders;
@@ -156,6 +156,37 @@ public class StoreOrdersController implements Initializable {
         updateChoiceBox(event, currentNumb);
         displayPizzas(event);
 
+
+    }
+
+    @FXML
+    void exportErrorAlert(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Export Error");
+        alert.setContentText("Could Not Export");
+        alert.showAndWait();
+    }
+
+    @FXML
+    void exportSuccessAlert(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Export Successful");
+        alert.setContentText("Successfully Exported Store Orders");
+        alert.showAndWait();
+    }
+    @FXML
+    void exportToFile(ActionEvent event){
+
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+
+        boolean expSuccess = orders.export(stage);
+
+        if(!expSuccess){
+            exportErrorAlert(event);
+            return;
+        }
+        exportSuccessAlert(event);
 
     }
 

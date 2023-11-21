@@ -6,10 +6,11 @@ public class BuildYourOwn extends Pizza {
 
     public static final double PRICE = 8.99;
 
+    public final String type = "Build Your Own";
+
   public BuildYourOwn(){
       this.toppings = new ArrayList<>();
-      this.size = Size.SMALL; //honestly we dont really need to define constructor since we have to customize everything
-                              // will likely delete later since Pizza default constructor is probably enough
+      this.size = Size.SMALL;
   }
     @Override
     public double price(){
@@ -31,5 +32,10 @@ public class BuildYourOwn extends Pizza {
             finalPrice += (toppings.size() - 3) * 1.49;
         }
         return finalPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + type + "] " + super.toString();
     }
 }

@@ -1,5 +1,13 @@
 package com.example.cs213project4;
 
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.FileChooser.ExtensionFilter;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,11 +76,9 @@ public class StoreOrders {
         return this.storeOrders.size();
     }
 
-    public String OrderToString(int index){
+    public String orderToString(int index){
        Order order = storeOrders.get(index);
        int orderNumber = order.getOrderNumber();
-       String exCheese = "EXTRA CHEESE";
-       String exSauce = "EXTRA SAUCE";
        double total = order.getOrder_Subtotal();
        double tax = 0.06625;
        total = (total*tax) + total;
@@ -84,18 +90,39 @@ public class StoreOrders {
        }
        for(int i =0; i<pizzaStrings.size(); i++){
            returnString += "\n" + pizzaStrings.get(i);
-           if(order.getPizza(i).extraCheese){
-               returnString += " " + exCheese;
-           }
-           if(order.getPizza(i).extraSauce){
-               returnString += " " + exSauce;
-           }
        }
        String totalString = new DecimalFormat("#,##0.00").format(total);
-       returnString+= "\n" + totalString;
+       returnString+= "\n" + "Total Price: "+ totalString;
        return returnString;
     }
 
+    public boolean export(Stage stage){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save File");
+        ExtensionFilter ex1 = new ExtensionFilter("Text Files", "*.txt");
+        fileChooser.getExtensionFilters().add(ex1);
+        File selectedFile = fileChooser.showSaveDialog(stage);
+
+        if(selectedFile == null){
+            return false;
+        }
+        String finalProduct = "";
+        for(int i =0; i<numberOfOrders(); i++){
+            finalProduct += orderToString(i);
+            finalProduct+= "\n";
+        }
+
+        String absPath = selectedFile.getAbsolutePath();
+        try{
+            BufferedWriter writer = new BufferedWriter(new FileWriter(absPath));
+            writer.write(finalProduct);
+            writer.close();
+            return true;
+        } catch(IOException e){
+            return false;
+        }
+
+    }
 
 
 }

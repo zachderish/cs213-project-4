@@ -20,7 +20,15 @@ public abstract class Pizza {
         String price = new DecimalFormat("#,##0.00").format(this.price());
         String toppings = this.toppings.toString().replace("[", "");
         toppings = toppings.replace("]", "");
-        return toppings + " $" + price;
+
+        String extras ="";
+        if(extraSauce){
+            extras+= ", EXTRA SAUCE";
+        }
+        if(extraCheese){
+            extras += ", EXTRA CHEESE";
+        }
+        return toppings + extras + " $" + price;
     }
 
 }
