@@ -277,6 +277,13 @@ public class BuildYourOwnController implements Initializable {
         alert.showAndWait();
     }
 
+    void noToppingsPopup() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Add Order Error");
+        alert.setContentText("Please Select At Least 3 toppings");
+        alert.showAndWait();
+    }
+
     /**
      * Button handler for add order, adds pizza to order array list.
      * @param event ActionEvent
@@ -285,6 +292,11 @@ public class BuildYourOwnController implements Initializable {
     void addOrderButton(ActionEvent event) {
         StoreOrders orders = mainController.getStoreOrders();
         int currentOrderNumber = orders.getAvailable_OrderNumber();
+
+        if(selectedToppingsList.getItems().size() < 3){
+            noToppingsPopup();
+            return;
+        }
 
         Order currentOrder = orders.getStoreOrders().get(currentOrderNumber);
         currentOrder.addPizza(pizza);

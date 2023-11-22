@@ -39,8 +39,21 @@ public class StoreOrders {
         return returnNum;
     }
 
+    public int findIndexOfOrder(Order order){
+        for(int i =0; i<this.storeOrders.size(); i++){
+            if(storeOrders.get(i).getOrderNumber() == order.getOrderNumber()){
+                return i;
+            }
+        }
+        return -1; //NOT FOUND
+    }
+
     public void addOrder(Order order) {
-        this.storeOrders.set(getAvailable_OrderNumber(), order);
+        int index = findIndexOfOrder(order);
+        this.storeOrders.set(index, order);
+      //  this.storeOrders.set(getAvailable_OrderNumber(), order);
+
+
         orderNumber++;
 
         ArrayList<Pizza> pizzaList = new ArrayList<>();
@@ -92,7 +105,7 @@ public class StoreOrders {
            returnString += "\n" + pizzaStrings.get(i);
        }
        String totalString = new DecimalFormat("#,##0.00").format(total);
-       returnString+= "\n" + "Total Price: "+ totalString;
+       returnString+= "\n" + "Total Price: $"+ totalString;
        return returnString;
     }
 
@@ -109,7 +122,7 @@ public class StoreOrders {
         String finalProduct = "";
         for(int i =0; i<numberOfOrders(); i++){
             finalProduct += orderToString(i);
-            finalProduct+= "\n";
+            finalProduct+= "\n\n";
         }
 
         String absPath = selectedFile.getAbsolutePath();

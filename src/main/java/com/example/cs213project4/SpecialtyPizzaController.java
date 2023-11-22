@@ -210,7 +210,7 @@ public class SpecialtyPizzaController implements Initializable {
         StoreOrders orders = mainController.getStoreOrders();
         int currentOrderNumber = orders.getAvailable_OrderNumber();
 
-        Order currentOrder = orders.getStoreOrders().get(currentOrderNumber);
+        Order currentOrder = orders.find(currentOrderNumber);
         currentOrder.addPizza(pizza);
         ArrayList<String> pizzas = currentOrder.getPizzas();
         System.out.println(pizzas);

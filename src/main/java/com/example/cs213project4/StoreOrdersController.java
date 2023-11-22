@@ -190,6 +190,7 @@ private boolean contains(ArrayList<Integer> list, int orderNumber){
 private boolean allOrdersPlaced(StoreOrders orders){
         orders = mainController.getReference().getStoreOrders();
      ArrayList<Integer> ordersPlaced = mainController.getReference().getOrdersPlaced();
+     currentOrderNumbers = mainController.getReference().getStoreOrders().getOrderNumbers();
         for(int i =0; i<orders.numberOfOrders(); i++){
             ArrayList<String> pizzaList = orders.find(i).getPizzas();
             if (pizzaList.isEmpty()) {
@@ -230,12 +231,12 @@ private boolean allOrdersPlaced(StoreOrders orders){
 
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
-
+/*
         if(!allOrdersPlaced(orders)){
-            exportErrorAlert(event);
+            orderNotPlacedExportAlert(event);
             return;
         }
-
+*/
         boolean expSuccess = orders.export(stage);
 
         if(!expSuccess){
