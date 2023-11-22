@@ -131,6 +131,8 @@ public class CurrentOrderController {
         }
 
         orders.addOrder(orders.find(currIndex));
+        mainController.getOrdersPlaced().add(currIndex); //purpose since all orders whether it was placed or not shows in storeOrders
+
         setPizzas();
         setPrices();
         setOrderNumber();

@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -103,7 +104,7 @@ public class StoreOrdersController implements Initializable {
     @FXML
     void displayPizzas(ActionEvent event) {
         if (soBox.getValue() == null || orders.numberOfOrders() == 0) {
-            noPizzaAlert();
+            //noPizzaAlert();
             totalText.setText("");
             orderList.setItems(null);
             return;
@@ -136,15 +137,33 @@ public class StoreOrdersController implements Initializable {
     }
 
     @FXML
+    void cancelSuccessAlert(ActionEvent event){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Cancel Successful");
+        alert.setContentText("Order Successfully Cancelled");
+        alert.showAndWait();
+    }
+
+    @FXML
+    void notPlacedAlert(ActionEvent event){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Cancel Error");
+        alert.setContentText("Order has not been officially placed");
+        alert.showAndWait();
+    }
+
+    @FXML
     void cancelOrder(ActionEvent event) {
         if (soBox.getValue() == null) {
             nullAlert(event);
             return;
         }
-        if (orders.numberOfOrders() == 0) {
-            nullAlert(event);
+        ArrayList<Integer> ordersPlaced = mainController.getReference().getOrdersPlaced();
+        if(!contains(ordersPlaced, soBox.getValue())){
+            notPlacedAlert(event);
             return;
         }
+
         orders = new MainController().getReference().getStoreOrders();
         int currentNumb = soBox.getValue();
         ArrayList<String> pizzaList = orders.find(currentNumb).getPizzas();
@@ -154,11 +173,35 @@ public class StoreOrdersController implements Initializable {
         }
         boolean removeMe = orders.removeOrder(soBox.getValue());
         updateChoiceBox(event, currentNumb);
+        cancelSuccessAlert(event);
         displayPizzas(event);
 
 
     }
+private boolean contains(ArrayList<Integer> list, int orderNumber){
+        for(int i =0; i<list.size(); i++){
+            if(list.get(i) == orderNumber){
+                return true;
+            }
+        }
+        return false;
+}
 
+private boolean allOrdersPlaced(StoreOrders orders){
+        orders = mainController.getReference().getStoreOrders();
+     ArrayList<Integer> ordersPlaced = mainController.getReference().getOrdersPlaced();
+        for(int i =0; i<orders.numberOfOrders(); i++){
+            ArrayList<String> pizzaList = orders.find(i).getPizzas();
+            if (pizzaList.isEmpty()) {
+                continue;
+            }
+            if(!contains(ordersPlaced,currentOrderNumbers.get(i))){
+                return false;
+            }
+        }
+
+        return true;
+}
     @FXML
     void exportErrorAlert(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -174,11 +217,24 @@ public class StoreOrdersController implements Initializable {
         alert.setContentText("Successfully Exported Store Orders");
         alert.showAndWait();
     }
+
+    @FXML
+    void orderNotPlacedExportAlert(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Export Error");
+        alert.setContentText("Not all orders have been officially placed");
+        alert.showAndWait();
+    }
     @FXML
     void exportToFile(ActionEvent event){
 
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
+
+        if(!allOrdersPlaced(orders)){
+            exportErrorAlert(event);
+            return;
+        }
 
         boolean expSuccess = orders.export(stage);
 

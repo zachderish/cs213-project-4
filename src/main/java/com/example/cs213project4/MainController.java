@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 
 public class MainController {
     private static StoreOrders orders = new StoreOrders();
-
+    private static ArrayList<Integer> ordersPlaced = new ArrayList<>();
 
     /**
      * Button handler for Specialty Pizzas.
@@ -113,5 +113,7 @@ public class MainController {
     public MainController getReference(){
         return this;
     }
+
+    public ArrayList<Integer> getOrdersPlaced(){ return ordersPlaced;}
 }
 
