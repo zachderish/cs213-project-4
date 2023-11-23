@@ -172,6 +172,7 @@ public class StoreOrdersController implements Initializable {
             return;
         }
         boolean removeMe = orders.removeOrder(soBox.getValue());
+        removeOrderPlaced(currentNumb);
         updateChoiceBox(event, currentNumb);
         cancelSuccessAlert(event);
         displayPizzas(event);
@@ -187,21 +188,43 @@ private boolean contains(ArrayList<Integer> list, int orderNumber){
         return false;
 }
 
+private void removeOrderPlaced(int orderNumber){
+    ArrayList<Integer> ordersPlaced = mainController.getReference().getOrdersPlaced();
+    for(int i =0; i<ordersPlaced.size(); i++){
+        if(ordersPlaced.get(i) == orderNumber){
+            ordersPlaced.remove(i);
+            return;
+        }
+    }
+}
+
+//For testing will delete later
+private void printPlacedCurrent(ArrayList<Integer> placed, ArrayList<Integer> current){
+        System.out.println("Beginning Placed List");
+    for (Integer value : placed) {
+        System.out.println(value);
+    }
+    System.out.println("End Placed List");
+    System.out.println("Beginning Current List");
+    for (Integer integer : current) {
+        System.out.println(integer);
+    }
+    System.out.println("End Current List");
+}
+
+
+
 private boolean allOrdersPlaced(StoreOrders orders){
         orders = mainController.getReference().getStoreOrders();
      ArrayList<Integer> ordersPlaced = mainController.getReference().getOrdersPlaced();
      currentOrderNumbers = mainController.getReference().getStoreOrders().getOrderNumbers();
-        for(int i =0; i<orders.numberOfOrders(); i++){
-            ArrayList<String> pizzaList = orders.find(i).getPizzas();
-            if (pizzaList.isEmpty()) {
-                continue;
-            }
-            if(!contains(ordersPlaced,currentOrderNumbers.get(i))){
-                return false;
-            }
-        }
 
-        return true;
+     int index = currentOrderNumbers.get(currentOrderNumbers.size()-1);
+     if(orders.find(index).getPizzas().isEmpty()){
+         return true;
+     }
+    return false;
+
 }
     @FXML
     void exportErrorAlert(ActionEvent event) {
@@ -223,7 +246,7 @@ private boolean allOrdersPlaced(StoreOrders orders){
     void orderNotPlacedExportAlert(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Export Error");
-        alert.setContentText("Not all orders have been officially placed");
+        alert.setContentText("Last Order Has Not Been Officially Placed");
         alert.showAndWait();
     }
     @FXML
@@ -231,12 +254,12 @@ private boolean allOrdersPlaced(StoreOrders orders){
 
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
-/*
+
         if(!allOrdersPlaced(orders)){
-            orderNotPlacedExportAlert(event);
+            orderNotPlacedExportAlert(event); //check if we have a order that has pizzas but not been officially "placed"
             return;
         }
-*/
+
         boolean expSuccess = orders.export(stage);
 
         if(!expSuccess){
