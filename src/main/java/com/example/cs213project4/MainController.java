@@ -15,6 +15,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Define Main Controller for GUI.
+ * @author Kenrick Eagar, Zachary Derish
+ */
 public class MainController {
     private static StoreOrders orders = new StoreOrders();
     private static ArrayList<Integer> ordersPlaced = new ArrayList<>();
@@ -110,10 +114,18 @@ public class MainController {
         return orders;
     }
 
+    /**
+     * Get main controller reference
+     * @return THIS main controller
+     */
     public MainController getReference(){
         return this;
     }
 
+    /**
+     * Get current orders placed list
+     * @return current orders placed list
+     */
     public ArrayList<Integer> getOrdersPlaced(){ return ordersPlaced;}
 }
 

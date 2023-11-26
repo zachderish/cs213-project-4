@@ -18,6 +18,11 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Current Order GUI Controller class.
+ * @author Kenrick Eagar, Zachary Derish
+ */
+
 public class CurrentOrderController {
     @FXML
     private TextField orderNumber;

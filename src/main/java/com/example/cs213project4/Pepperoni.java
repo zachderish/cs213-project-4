@@ -2,6 +2,11 @@ package com.example.cs213project4;
 
 import java.util.ArrayList;
 
+
+/**
+ * Extend Pizza Class and Define Pepperoni Class
+ * @author Kenrick Eagar, Zachary Derish
+ */
 public class Pepperoni extends Pizza{
 
     public static final double PRICE = 10.99;
@@ -13,6 +18,10 @@ public class Pepperoni extends Pizza{
         this.sauce = Sauce.TOMATO;
         this.size = Size.SMALL;
     }
+    /**
+     * Method to return Price of Pepperoni Pizza
+     * @return double, representing price of pizza
+     */
     @Override
     public double price(){
         double finalPrice = PRICE;

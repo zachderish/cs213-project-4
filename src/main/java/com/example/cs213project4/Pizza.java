@@ -1,6 +1,11 @@
 package com.example.cs213project4;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+/**
+ * Define abstract Pizza class
+ * @author Kenrick Eagar, Zachary Derish
+ */
 public abstract class Pizza {
 
     protected ArrayList<Topping> toppings;
@@ -9,6 +14,10 @@ public abstract class Pizza {
     protected boolean extraSauce;
     protected boolean extraCheese;
 
+    /**
+     * Method to return and calculate price of pizza
+     * @return double representing price of pizza object
+     */
     public abstract double price();
 
     /**

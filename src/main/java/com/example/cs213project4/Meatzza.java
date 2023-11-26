@@ -2,11 +2,19 @@ package com.example.cs213project4;
 
 import java.util.ArrayList;
 
+/**
+ * Extend Pizza class and Define Meatzza Class.
+ * @author Kenrick Eagar, Zachary Derish
+ */
+
 public class Meatzza extends Pizza{
 
     public static final double PRICE = 16.99;
     private final String type = "Meatzza";
 
+    /**
+     * Meatzza default constructor
+     */
     public Meatzza(){
         ArrayList<Topping> toppings = new ArrayList<>();
         toppings.add(Topping.SAUSAGE);
@@ -17,6 +25,10 @@ public class Meatzza extends Pizza{
         this.sauce = Sauce.TOMATO;
         this.size = Size.SMALL;
     }
+    /**
+     * Method to return Price of Meatzza Pizza
+     * @return double, representing price of pizza
+     */
     @Override
     public double price(){
         double finalPrice = PRICE;

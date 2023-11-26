@@ -2,7 +2,18 @@ package com.example.cs213project4;
 
 import java.util.ArrayList;
 
+
+/**
+ * Define PizzaMaker Class
+ * @author Kenrick Eagar, Zachary Derish
+ */
 public class PizzaMaker {
+
+    /**
+     * Based off given pizza type, create and return specificed pizza object
+     * @param pizzaType, string representation of pizzatype
+     * @return pizza, pizza object
+     */
     public static Pizza createPizza(String pizzaType){ // we dont have to worry about size or extrasauce can manually update the pizzas
 
         if(pizzaType.equals("Deluxe")){
@@ -24,17 +35,6 @@ public class PizzaMaker {
         return new BuildYourOwn();
 
     }
-//testbed will delete later
-    public static void main(String[] args){
 
-        Pizza test = createPizza("Deluxe");
-        System.out.println(test.price());
-        test.size = Size.LARGE;
-        System.out.println(test.price());
-
-
-        System.out.println(test.sauce);
-        System.out.println(test.size);
-    }
 
 }

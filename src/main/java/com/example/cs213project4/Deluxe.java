@@ -2,10 +2,18 @@ package com.example.cs213project4;
 
 import java.util.ArrayList;
 
+/**
+ * Extend Pizza Class and Define Deluxe Class
+ * @author Kenrick Eagar, Zachary Derish
+ */
 public class Deluxe extends Pizza{
 
     public static final double PRICE = 14.99;
     private final String type = "Deluxe";
+
+    /**
+     * Deluxe default constructor
+     */
     public Deluxe(){
         ArrayList<Topping> toppings = new ArrayList<>();
         toppings.add(Topping.SAUSAGE);
@@ -17,6 +25,11 @@ public class Deluxe extends Pizza{
         this.sauce = Sauce.TOMATO;
         this.size = Size.SMALL; //default is small
     }
+
+    /**
+     * Method to return Price of Deluxe Pizza
+     * @return double, representing price of pizza
+     */
     @Override
     public double price(){
         double finalPrice = PRICE;

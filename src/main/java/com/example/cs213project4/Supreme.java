@@ -2,10 +2,17 @@ package com.example.cs213project4;
 
 import java.util.ArrayList;
 
+/**
+ * Extend Pizza Class and Define Supreme Class
+ * @author Kenrick Eagar, Zachary Derish
+ */
 public class Supreme extends Pizza{
     public static final double PRICE = 15.99;
     private final String type = "Supreme";
 
+    /**
+     * Default Constructor for Supreme Object
+     */
     public Supreme(){
         ArrayList<Topping> toppings = new ArrayList<>();
         toppings.add(Topping.SAUSAGE);
@@ -18,6 +25,11 @@ public class Supreme extends Pizza{
         this.toppings = toppings;
         this.sauce = Sauce.TOMATO;
     }
+
+    /**
+     * Method to return Price of Supreme Pizza
+     * @return double, representing price of pizza
+     */
     @Override
     public double price(){
         double finalPrice = PRICE;

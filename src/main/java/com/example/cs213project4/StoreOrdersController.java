@@ -19,6 +19,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Store Orders GUI Controller class.
+ * @author Kenrick Eagar, Zachary Derish
+ */
 public class StoreOrdersController implements Initializable {
 
     @FXML
@@ -37,7 +41,6 @@ public class StoreOrdersController implements Initializable {
 
     /**
      * Button handler for back button.
-     *
      * @param event ActionEvent
      */
     @FXML
@@ -52,11 +55,17 @@ public class StoreOrdersController implements Initializable {
         stage.show();
     }
 
+    /**
+     * set mainController to current MainController
+     * @param controller, the main controller we want to save
+     */
     public void setMainController(MainController controller) {
         mainController = controller;
     }
 
-
+    /**
+     * Pushes alert stating no pizza orders have been placed
+     */
     void noPizzaAlert() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("No Pizza");
@@ -64,6 +73,11 @@ public class StoreOrdersController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Initialize all list views
+     * @param url, default url
+     * @param resourceBundle, default resource bundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         orders = mainController.getStoreOrders();
@@ -73,17 +87,14 @@ public class StoreOrdersController implements Initializable {
         }
         currentOrderNumbers = orders.getOrderNumbers();
         soBox.getItems().addAll(currentOrderNumbers);
-        // int currentNum = currentOrderNumbers.get(0);
-        // soBox.setValue(currentNum);
-        //setPrice();
 
         soBox.setOnAction(this::displayPizzas);
-        // orderList.getItems().addAll(pizzaString);
-
 
     }
 
-
+    /**
+     * Method to calculate and show current price of order
+     */
     void setPrice() {
         int orderNum = soBox.getValue();
         double taxes = 0.06625;
@@ -93,6 +104,11 @@ public class StoreOrdersController implements Initializable {
         totalText.setText(totalString);
     }
 
+    /**
+     * Method to update the list of order numbers in choice box
+     * @param event, the event triggering the method
+     * @param orderNumber, the order number we want to update
+     */
     @FXML
     void updateChoiceBox(ActionEvent event, int orderNumber) {
         soBox.getItems().removeAll(currentOrderNumbers);
@@ -101,6 +117,10 @@ public class StoreOrdersController implements Initializable {
 
     }
 
+    /**
+     * Method to display pizzas in an order
+     * @param event, the event triggering our method
+     */
     @FXML
     void displayPizzas(ActionEvent event) {
         if (soBox.getValue() == null || orders.numberOfOrders() == 0) {
@@ -120,6 +140,10 @@ public class StoreOrdersController implements Initializable {
         setPrice();
     }
 
+    /**
+     * Displays Message if user trys to cancel orders with no pizzas
+     * @param event, event triggering our method
+     */
     @FXML
     void emptyCancelAlert(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -128,6 +152,10 @@ public class StoreOrdersController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Displays message if user trys to cancel without selecting order
+     * @param event
+     */
     @FXML
     void nullAlert(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -136,6 +164,10 @@ public class StoreOrdersController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Displays message when cancel order is successful
+     * @param event, the event triggering our method
+     */
     @FXML
     void cancelSuccessAlert(ActionEvent event){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -143,7 +175,10 @@ public class StoreOrdersController implements Initializable {
         alert.setContentText("Order Successfully Cancelled");
         alert.showAndWait();
     }
-
+    /**
+     * Displays message when action is performed on our not officially placed
+     * @param event, the event triggering our method
+     */
     @FXML
     void notPlacedAlert(ActionEvent event){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -152,6 +187,10 @@ public class StoreOrdersController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Method to cancel an order in GUI interface
+     * @param event, the event triggering our method
+     */
     @FXML
     void cancelOrder(ActionEvent event) {
         if (soBox.getValue() == null) {
@@ -179,7 +218,14 @@ public class StoreOrdersController implements Initializable {
 
 
     }
-private boolean contains(ArrayList<Integer> list, int orderNumber){
+
+    /**
+     * return boolean if integer is in a given integer ArrayList
+     * @param list, a given integer arraylist
+     * @param orderNumber, the integer we want to search for
+     * @return true if order is in list, false otherwise
+     */
+    private boolean contains(ArrayList<Integer> list, int orderNumber){
         for(int i =0; i<list.size(); i++){
             if(list.get(i) == orderNumber){
                 return true;
@@ -188,7 +234,11 @@ private boolean contains(ArrayList<Integer> list, int orderNumber){
         return false;
 }
 
-private void removeOrderPlaced(int orderNumber){
+    /**
+     * Remove ordernumber from the ordersPlaced list
+     * @param orderNumber, the list of orderNumbers officially placed
+     */
+    private void removeOrderPlaced(int orderNumber){
     ArrayList<Integer> ordersPlaced = mainController.getReference().getOrdersPlaced();
     for(int i =0; i<ordersPlaced.size(); i++){
         if(ordersPlaced.get(i) == orderNumber){
@@ -198,7 +248,9 @@ private void removeOrderPlaced(int orderNumber){
     }
 }
 
-//For testing will delete later
+
+    /*
+    //For testing will delete later
 private void printPlacedCurrent(ArrayList<Integer> placed, ArrayList<Integer> current){
         System.out.println("Beginning Placed List");
     for (Integer value : placed) {
@@ -211,10 +263,14 @@ private void printPlacedCurrent(ArrayList<Integer> placed, ArrayList<Integer> cu
     }
     System.out.println("End Current List");
 }
+*/
 
-
-
-private boolean allOrdersPlaced(StoreOrders orders){
+    /**
+     * Method to check if all existing orders with pizzas have been officially placed
+     * @param orders, a storeOrder object
+     * @return true if all orders have been officially placed, false otherwise
+     */
+    private boolean allOrdersPlaced(StoreOrders orders){
         orders = mainController.getReference().getStoreOrders();
      ArrayList<Integer> ordersPlaced = mainController.getReference().getOrdersPlaced();
      currentOrderNumbers = mainController.getReference().getStoreOrders().getOrderNumbers();
@@ -226,6 +282,11 @@ private boolean allOrdersPlaced(StoreOrders orders){
     return false;
 
 }
+
+    /**
+     * Displays message if export was unsuccessful
+     * @param event, the event triggering our method
+     */
     @FXML
     void exportErrorAlert(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -233,7 +294,10 @@ private boolean allOrdersPlaced(StoreOrders orders){
         alert.setContentText("Could Not Export");
         alert.showAndWait();
     }
-
+    /**
+     * Displays message if export was unsuccessful
+     * @param event, the event triggering our method
+     */
     @FXML
     void exportSuccessAlert(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -242,6 +306,10 @@ private boolean allOrdersPlaced(StoreOrders orders){
         alert.showAndWait();
     }
 
+    /**
+     * Displays message if order with pizzas have not been officially placed
+     * @param event, the event triggering our method
+     */
     @FXML
     void orderNotPlacedExportAlert(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -249,6 +317,11 @@ private boolean allOrdersPlaced(StoreOrders orders){
         alert.setContentText("Last Order Has Not Been Officially Placed");
         alert.showAndWait();
     }
+
+    /**
+     * Method to export store orders to file
+     * @param event, the event triggering our method
+     */
     @FXML
     void exportToFile(ActionEvent event){
 

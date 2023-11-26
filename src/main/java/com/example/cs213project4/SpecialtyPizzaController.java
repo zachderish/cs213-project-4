@@ -20,6 +20,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Specialty Pizza GUI Controller class.
+ * @author Kenrick Eagar, Zachary Derish
+ */
 public class SpecialtyPizzaController implements Initializable {
     @FXML
     private ComboBox<String> specialtyComboBox;
@@ -89,6 +93,10 @@ public class SpecialtyPizzaController implements Initializable {
         setImage(pizzaType);
     }
 
+    /**
+     *Set the image based off given pizza type
+     * @param pizzaType, string describing pizza type
+     */
     @FXML
     private void setImage(String pizzaType) {
 

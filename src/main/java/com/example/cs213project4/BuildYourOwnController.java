@@ -20,6 +20,11 @@ import java.util.ResourceBundle;
 
 import static com.example.cs213project4.PizzaMaker.createPizza;
 
+
+/**
+ * Define Controller for Build Your Own GUI Class
+ * @author Kenrick Eagar, Zachary Derish
+ */
 public class BuildYourOwnController implements Initializable {
 
     @FXML

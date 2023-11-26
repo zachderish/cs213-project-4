@@ -2,11 +2,18 @@ package com.example.cs213project4;
 
 import java.util.ArrayList;
 
+/**
+ * Extend Pizza Class and Define Seafood Class
+ * @author Kenrick Eagar, Zachary Derish
+ */
 public class Seafood extends Pizza{
 
     public static final double PRICE = 17.99;
     private final String type = "Seafood";
 
+    /**
+     * Deluxe default constructor
+     */
     public Seafood(){
         ArrayList<Topping> toppings = new ArrayList<>();
         toppings.add(Topping.SHRIMP);
@@ -16,6 +23,10 @@ public class Seafood extends Pizza{
         this.sauce = Sauce.ALFREDO;
         this.size = Size.SMALL;
     }
+    /**
+     * Method to return Price of Seafood Pizza
+     * @return double, representing price of pizza
+     */
     @Override
     public double price(){
         double finalPrice = PRICE;
