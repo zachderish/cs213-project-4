@@ -239,31 +239,16 @@ public class StoreOrdersController implements Initializable {
      * @param orderNumber, the list of orderNumbers officially placed
      */
     private void removeOrderPlaced(int orderNumber){
-    ArrayList<Integer> ordersPlaced = mainController.getReference().getOrdersPlaced();
-    for(int i =0; i<ordersPlaced.size(); i++){
-        if(ordersPlaced.get(i) == orderNumber){
-            ordersPlaced.remove(i);
-            return;
+        ArrayList<Integer> ordersPlaced = mainController.getReference().getOrdersPlaced();
+        for(int i =0; i<ordersPlaced.size(); i++){
+            if(ordersPlaced.get(i) == orderNumber){
+                ordersPlaced.remove(i);
+                return;
+            }
         }
     }
-}
 
 
-    /*
-    //For testing will delete later
-private void printPlacedCurrent(ArrayList<Integer> placed, ArrayList<Integer> current){
-        System.out.println("Beginning Placed List");
-    for (Integer value : placed) {
-        System.out.println(value);
-    }
-    System.out.println("End Placed List");
-    System.out.println("Beginning Current List");
-    for (Integer integer : current) {
-        System.out.println(integer);
-    }
-    System.out.println("End Current List");
-}
-*/
 
     /**
      * Method to check if all existing orders with pizzas have been officially placed
@@ -272,16 +257,15 @@ private void printPlacedCurrent(ArrayList<Integer> placed, ArrayList<Integer> cu
      */
     private boolean allOrdersPlaced(StoreOrders orders){
         orders = mainController.getReference().getStoreOrders();
-     ArrayList<Integer> ordersPlaced = mainController.getReference().getOrdersPlaced();
-     currentOrderNumbers = mainController.getReference().getStoreOrders().getOrderNumbers();
+        ArrayList<Integer> ordersPlaced = mainController.getReference().getOrdersPlaced();
+        currentOrderNumbers = mainController.getReference().getStoreOrders().getOrderNumbers();
 
-     int index = currentOrderNumbers.get(currentOrderNumbers.size()-1);
-     if(orders.find(index).getPizzas().isEmpty()){
-         return true;
-     }
-    return false;
-
-}
+        int index = currentOrderNumbers.get(currentOrderNumbers.size()-1);
+        if(orders.find(index).getPizzas().isEmpty()){
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Displays message if export was unsuccessful
@@ -294,6 +278,7 @@ private void printPlacedCurrent(ArrayList<Integer> placed, ArrayList<Integer> cu
         alert.setContentText("Could Not Export");
         alert.showAndWait();
     }
+
     /**
      * Displays message if export was unsuccessful
      * @param event, the event triggering our method

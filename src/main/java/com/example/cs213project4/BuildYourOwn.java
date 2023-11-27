@@ -17,10 +17,11 @@ public class BuildYourOwn extends Pizza {
     /**
      * Build Your Own default constructor
      */
-  public BuildYourOwn(){
+    public BuildYourOwn(){
       this.toppings = new ArrayList<>();
       this.size = Size.SMALL;
-  }
+    }
+
     /**
      * Method to return Price of Build Your Own Pizza
      * @return double, representing price of pizza

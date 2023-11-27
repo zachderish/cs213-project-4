@@ -51,7 +51,7 @@ public class BuildYourOwnController implements Initializable {
     private BuildYourOwn pizza = (BuildYourOwn) createPizza("BuildYourOwn");
 
     /**
-     *Method to disable alfredo sauce button when tomatos selected
+     * Method to disable alfredo sauce button when tomatos selected
      * @param event, when tomato button is selected
      */
     @FXML
