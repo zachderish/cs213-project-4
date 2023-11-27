@@ -219,9 +219,11 @@ public class SpecialtyPizzaController implements Initializable {
         int currentOrderNumber = orders.getAvailable_OrderNumber();
 
         Order currentOrder = orders.find(currentOrderNumber);
+
         currentOrder.addPizza(pizza);
+        ActionEvent fakeEvent = new ActionEvent();
+        setPizza(fakeEvent);
         ArrayList<String> pizzas = currentOrder.getPizzas();
-        System.out.println(pizzas);
 
         pizzaAddedPopup();
     }

@@ -75,13 +75,12 @@ public class CurrentOrderController {
     @FXML
     void setPizzas() {
         int currentOrderNum = mainController.getStoreOrders().getAvailable_OrderNumber();
-        StoreOrders orders = mainController.getStoreOrders();//.getStoreOrders();
+        StoreOrders orders = mainController.getStoreOrders();
         Order currentOrder = orders.find(currentOrderNum);
         ArrayList<String> pizzas = currentOrder.getPizzas();
 
         ObservableList<String> pizzaString = FXCollections.observableArrayList(pizzas);
         orderTextArea.setItems(pizzaString);
-        System.out.println(pizzaString);
     }
 
     /**

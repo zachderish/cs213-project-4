@@ -305,8 +305,11 @@ public class BuildYourOwnController implements Initializable {
 
         Order currentOrder = orders.find(currentOrderNumber);
         currentOrder.addPizza(pizza);
+
+        // create new pizza after current pizza added
+        pizza = (BuildYourOwn) createPizza("BuildYourOwn");
+
         ArrayList<String> pizzas = currentOrder.getPizzas();
-        System.out.println(pizzas);
 
         pizzaAddedPopup();
     }
